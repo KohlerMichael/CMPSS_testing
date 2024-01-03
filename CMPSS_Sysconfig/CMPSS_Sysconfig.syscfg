@@ -1,0 +1,122 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/boards/LAUNCHXL_F28379D" --context "CPU1" --product "C2000WARE@5.00.00.00"
+ * @versions {"tool":"1.17.0+3128"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const cmpss       = scripting.addModule("/driverlib/cmpss.js", {}, false);
+const cmpss1      = cmpss.addInstance();
+const cmpss2      = cmpss.addInstance();
+const epwm        = scripting.addModule("/driverlib/epwm.js", {}, false);
+const epwm1       = epwm.addInstance();
+const epwmxbar    = scripting.addModule("/driverlib/epwmxbar.js", {}, false);
+const epwmxbar1   = epwmxbar.addInstance();
+const epwmxbar2   = epwmxbar.addInstance();
+const epwmxbar3   = epwmxbar.addInstance();
+const outputxbar  = scripting.addModule("/driverlib/outputxbar.js", {}, false);
+const outputxbar1 = outputxbar.addInstance();
+const outputxbar2 = outputxbar.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+cmpss1.enableModule         = true;
+cmpss1.$name                = "Comp_Hysteresis";
+cmpss1.cmpssHighName        = "Hys_H";
+cmpss1.dacValHigh           = 3000;
+cmpss1.cmpssLowName         = "Hys_L";
+cmpss1.dacValLow            = 1000;
+cmpss1.clearFilterLatchLow  = true;
+cmpss1.samplePrescaleLow    = 10;
+cmpss1.clearFilterLatchHigh = true;
+cmpss1.samplePrescaleHigh   = 10;
+cmpss1.highCTRIPOUT         = "CMPSS_TRIPOUT_FILTER";
+cmpss1.lowCTRIPOUT          = "CMPSS_TRIPOUT_FILTER";
+cmpss1.sampleWindowLow      = 20;
+cmpss1.thresholdLow         = 11;
+cmpss1.sampleWindowHigh     = 20;
+cmpss1.thresholdHigh        = 11;
+cmpss1.initFilterHigh       = true;
+cmpss1.initFilterLow        = true;
+cmpss1.hysteresisVal        = "2";
+
+cmpss2.$name                = "myCMPSS0";
+cmpss2.cmpssBase            = "CMPSS2_BASE";
+cmpss2.enableModule         = true;
+cmpss2.cmpssHighName        = "nullH";
+cmpss2.highCTRIPOUT         = "CMPSS_TRIPOUT_FILTER";
+cmpss2.dacValHigh           = 1000;
+cmpss2.initFilterHigh       = true;
+cmpss2.clearFilterLatchHigh = true;
+cmpss2.samplePrescaleHigh   = 10;
+cmpss2.sampleWindowHigh     = 20;
+cmpss2.thresholdHigh        = 11;
+cmpss2.hysteresisVal        = "2";
+
+epwm1.$name                                                           = "myEPWM0";
+epwm1.$hardware                                                       = system.deviceData.board.components.BP_SITE_1.subComponents.PWM_LOC1;
+epwm1.epwmTimebase_hsClockDiv                                         = "EPWM_HSCLOCK_DIVIDER_1";
+epwm1.epwmTimebase_counterMode                                        = "EPWM_COUNTER_MODE_UP";
+epwm1.hrpwm_syncSource                                                = "HRPWM_PWMSYNC_SOURCE_ZERO";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCAH                            = "EPWM_DC_TRIP_TRIPIN4";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCAL                            = "EPWM_DC_TRIP_TRIPIN5";
+epwm1.epwmDigitalCompare_EPWM_TZ_DC_OUTPUT_A1                         = "EPWM_TZ_EVENT_DCXH_HIGH";
+epwm1.epwmDigitalCompare_EPWM_DC_MODULE_A_EPWM_DC_EVENT_2_eventSource = "EPWM_DC_EVENT_SOURCE_FILT_SIGNAL";
+epwm1.epwmActionQualifier_continousSwForceReloadMode                  = "EPWM_AQ_SW_IMMEDIATE_LOAD";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCAEVT1                       = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCAEVT2                       = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTimebase_period                                             = 1000;
+epwm1.epwmTimebase_periodLoadMode                                     = "EPWM_PERIOD_DIRECT_LOAD";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA                           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmActionQualifier_EPWM_AQ_OUTPUT_A_ON_T1_COUNT_UP             = "EPWM_AQ_OUTPUT_LOW";
+epwm1.epwmActionQualifier_EPWM_AQ_OUTPUT_A_ON_T2_COUNT_UP             = "EPWM_AQ_OUTPUT_HIGH";
+epwm1.epwmActionQualifier_t2Source                                    = "EPWM_AQ_TRIGGER_EVENT_TRIG_DCB_1";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCBL                            = "EPWM_DC_TRIP_TRIPIN4";
+epwm1.epwmDigitalCompare_EPWM_TZ_DC_OUTPUT_B1                         = "EPWM_TZ_EVENT_DCXH_HIGH";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB                           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCBEVT1                       = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCBEVT2                       = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCBH                            = "EPWM_DC_TRIP_TRIPIN7";
+
+epwmxbar1.$name           = "Trip_Hys_H";
+epwmxbar1.useSourceSelect = true;
+epwmxbar1.sourceSignals   = ["CMPSS1_CTRIPH"];
+
+epwmxbar2.$name           = "Trip_Hys_H_or_L";
+epwmxbar2.tripInput       = "XBAR_TRIP5";
+epwmxbar2.mux0Config      = "XBAR_EPWM_MUX00_CMPSS1_CTRIPH_OR_L";
+epwmxbar2.invertMode      = true;
+epwmxbar2.sourceSignals   = ["CMPSS1_CTRIPL"];
+epwmxbar2.useSourceSelect = true;
+
+epwmxbar3.$name           = "myEPWMXBAR0";
+epwmxbar3.tripInput       = "XBAR_TRIP7";
+epwmxbar3.invertMode      = true;
+epwmxbar3.useSourceSelect = true;
+epwmxbar3.sourceSignals   = ["CMPSS1_CTRIPL"];
+
+outputxbar1.$name                            = "OUT_H";
+outputxbar1.useSourceSelect                  = true;
+outputxbar1.sourceSignals                    = ["CMPSS1_CTRIPOUTH"];
+outputxbar1.outputxbar.outputxbarPin.$assign = "boosterpack1.34";
+
+outputxbar2.$name                            = "OUT_H_or_L";
+outputxbar2.useSourceSelect                  = true;
+outputxbar2.sourceSignals                    = ["CMPSS1_CTRIPOUTH_OR_L"];
+outputxbar2.invertMode                       = true;
+outputxbar2.outputxbar.outputxbarPin.$assign = "boosterpack1.33";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+epwm1.epwm.$suggestSolution             = "EPWM1";
+epwm1.epwm.epwm_aPin.$suggestSolution   = "boosterpack1.40";
+epwm1.epwm.epwm_bPin.$suggestSolution   = "boosterpack1.39";
+outputxbar1.outputxbar.$suggestSolution = "OUTPUTXBAR1";
+outputxbar2.outputxbar.$suggestSolution = "OUTPUTXBAR7";
