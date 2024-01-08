@@ -1,0 +1,106 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/boards\LAUNCHXL_F2800137" --context "system" --product "C2000WARE@5.00.00.00"
+ * @versions {"tool":"1.17.0+3128"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const analog    = scripting.addModule("/driverlib/analog.js", {}, false);
+const analog1   = analog.addInstance();
+const cmpss     = scripting.addModule("/driverlib/cmpss.js", {}, false);
+const cmpss1    = cmpss.addInstance();
+const cputimer  = scripting.addModule("/driverlib/cputimer.js", {}, false);
+const cputimer1 = cputimer.addInstance();
+const epwm      = scripting.addModule("/driverlib/epwm.js", {}, false);
+const epwm1     = epwm.addInstance();
+const epwmxbar  = scripting.addModule("/driverlib/epwmxbar.js", {}, false);
+const epwmxbar1 = epwmxbar.addInstance();
+const epwmxbar2 = epwmxbar.addInstance();
+const gpio      = scripting.addModule("/driverlib/gpio.js", {}, false);
+const gpio1     = gpio.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+cmpss1.$name               = "Hys";
+cmpss1.enableModule        = true;
+cmpss1.cmpssHighName       = "Hys_H";
+cmpss1.highCTRIPOUT        = "CMPSS_TRIPOUT_FILTER";
+cmpss1.dacValHigh          = 3000;
+cmpss1.initFilterHigh      = true;
+cmpss1.samplePrescaleHigh  = 10;
+cmpss1.sampleWindowHigh    = 20;
+cmpss1.thresholdHigh       = 11;
+cmpss1.cmpssLowName        = "Hys_L";
+cmpss1.lowCTRIPOUT         = "CMPSS_TRIPOUT_FILTER";
+cmpss1.dacValLow           = 1000;
+cmpss1.initFilterLow       = true;
+cmpss1.clearFilterLatchLow = true;
+cmpss1.samplePrescaleLow   = 10;
+cmpss1.sampleWindowLow     = 20;
+cmpss1.thresholdLow        = 11;
+cmpss1.hysteresisVal       = "1";
+
+analog1.$name            = "myANALOGPinMux0";
+cmpss1.analog            = analog1;
+analog1.useCase          = "CUSTOM";
+analog1.useInterfacePins = ["A2/C9, GPIO224"];
+
+cputimer1.$name                    = "myCPUTIMER0";
+cputimer1.startTimer               = true;
+cputimer1.enableInterrupt          = true;
+cputimer1.registerInterrupts       = true;
+cputimer1.timerPrescaler           = 59;
+cputimer1.timerPeriod              = 9;
+cputimer1.timerInt.enableInterrupt = true;
+
+epwm1.$name                                               = "myEPWM0";
+epwm1.$hardware                                           = system.deviceData.board.components.BP_SITE_1.subComponents.PWM_LOC1;
+epwm1.epwmTimebase_hsClockDiv                             = "EPWM_HSCLOCK_DIVIDER_1";
+epwm1.epwmTimebase_periodLoadMode                         = "EPWM_PERIOD_DIRECT_LOAD";
+epwm1.epwmTimebase_period                                 = 1000;
+epwm1.epwmTimebase_counterMode                            = "EPWM_COUNTER_MODE_UP";
+epwm1.epwmTimebase_syncInPulseSource                      = "EPWM_SYNC_IN_PULSE_SRC_DISABLE";
+epwm1.epwmActionQualifier_t2Source                        = "EPWM_AQ_TRIGGER_EVENT_TRIG_DCB_1";
+epwm1.epwmActionQualifier_EPWM_AQ_OUTPUT_A_ON_T1_COUNT_UP = "EPWM_AQ_OUTPUT_LOW";
+epwm1.epwmActionQualifier_EPWM_AQ_OUTPUT_A_ON_T2_COUNT_UP = "EPWM_AQ_OUTPUT_HIGH";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA               = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB               = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCAEVT1           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCAEVT2           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCBEVT1           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmTripZone_EPWM_TZ_ACTION_EVENT_DCBEVT2           = "EPWM_TZ_ACTION_DISABLE";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCAH                = "EPWM_DC_TRIP_TRIPIN4";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCAL                = "EPWM_DC_TRIP_TRIPIN5";
+epwm1.epwmDigitalCompare_EPWM_TZ_DC_OUTPUT_A1             = "EPWM_TZ_EVENT_DCXH_HIGH";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCBH                = "EPWM_DC_TRIP_TRIPIN5";
+epwm1.epwmDigitalCompare_EPWM_DC_TYPE_DCBL                = "EPWM_DC_TRIP_TRIPIN4";
+epwm1.epwmDigitalCompare_EPWM_TZ_DC_OUTPUT_B1             = "EPWM_TZ_EVENT_DCXH_HIGH";
+
+epwmxbar1.$name           = "myEPWMXBAR0";
+epwmxbar1.useSourceSelect = true;
+epwmxbar1.sourceSignals   = ["CMPSS1_CTRIPH"];
+
+epwmxbar2.$name           = "myEPWMXBAR1";
+epwmxbar2.tripInput       = "XBAR_TRIP5";
+epwmxbar2.useSourceSelect = true;
+epwmxbar2.sourceSignals   = ["CMPSS1_CTRIPL"];
+epwmxbar2.invertMode      = true;
+
+gpio1.$name           = "myGPIO0";
+gpio1.direction       = "GPIO_DIR_MODE_OUT";
+gpio1.gpioPin.$assign = "boosterpack2.59";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+analog1.analog.$suggestSolution                      = "ANALOG";
+analog1.analog["a2/c9, gpio224Pin"].$suggestSolution = "boosterpack1.25";
+epwm1.epwm.$suggestSolution                          = "EPWM1";
+epwm1.epwm.epwm_aPin.$suggestSolution                = "boosterpack1.40";
+epwm1.epwm.epwm_bPin.$suggestSolution                = "boosterpack1.39";
